@@ -13,6 +13,10 @@ Webová aplikace pro evidenci servisu nákladních vozů, stavebních strojů a 
 | `manifest.webmanifest`, `sw.js`, `icon-*.png` | Instalace na plochu telefonu a offline režim |
 | `NAVOD.md` | Návod ke spuštění krok za krokem |
 | `claude-verze/` | Původní verze běžící na claude.ai (jen pro referenci, nenasazuje se) |
+| `prototyp/` | Náhled s demo daty pro Broulicka (HTML/JS/CSS, publikuje se na claude.ai) |
+| `pozadavky/` | Broulickovy požadavky, jeden soubor na požadavek |
+| `db/migrace/` | SQL migrace pro MySQL 5.5 (schéma + data z náhledu) |
+| `nastroje/` | `pozadavky.py` (přehled požadavků), `migrace.py` (data → SQL) |
 
 ## Spuštění
 

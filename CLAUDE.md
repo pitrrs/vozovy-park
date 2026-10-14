@@ -55,6 +55,36 @@ Když někdo (typicky Broulick) začne něco řešit z mobilu:
 - Nepřepisovat historii `main` (žádný force-push na `main`).
 - Když změna vyžaduje krok mimo git (nové `firestore.rules`, nasazení, publikace artefaktu na claude.ai), napiš to do PR a řekni to uživateli.
 
+## Náhled, požadavky a migrace (postup pro každý Broulickův prompt)
+
+Broulick vidí výsledek svých promptů živě v **náhledu**: HTML/JS/CSS prototyp s demo daty, oddělený od ostré aplikace i od Petrovy finální aplikace ve Flutteru.
+
+| Co | Kde |
+|---|---|
+| Náhled (zdroj) | `prototyp/index.html` + generovaný `prototyp/pozadavky.js` |
+| Náhled (živá stránka) | artefakt na claude.ai: https://claude.ai/artifact/EchWSd9QJHNzX25zFEKGX4 (vlastní ho Broulick) |
+| Výchozí demo data | `prototyp/demo-data.json` |
+| Požadavky | `pozadavky/*.md`, přehled `pozadavky/README.md` |
+| Schéma MySQL 5.5 | `db/migrace/V001__schema.sql` (návrh – schvaluje Petr) |
+| Datové migrace | `db/migrace/V###__data_*.sql`, poslední převedený stav `db/stav-dat.json` |
+
+Když Broulick něco chce:
+1. **Zapiš požadavek** do `pozadavky/RRRR-MM-DD-kratky-popis.md` (šablona = kterýkoli existující soubor): jeho slova co nejvěrněji, stav `nový`. Když navazuje na starší požadavek, uprav ten.
+2. **Uprav náhled** v `prototyp/index.html`. Jen HTML/JS/CSS bez buildu a knihoven navíc. Změnu popiš v sekci „Jak to funguje v náhledu“ a stav přepni na `v náhledu`. Co je pro Petra důležité (nové pole, nové pravidlo), napiš do „Poznámky pro Petra“.
+3. `python3 nastroje/pozadavky.py` – přegeneruje přehled a `prototyp/pozadavky.js`.
+4. **Commit + push** do větve podle pravidel výše.
+5. **Publikuj náhled**: Artifact publish souboru `prototyp/index.html` s `files: {"pozadavky.js": "prototyp/pozadavky.js"}` na URL výše. Jde jen ze sezení Broulickova účtu; jinde jen upozorni, že náhled se aktualizuje po publikaci.
+6. Řekni Broulickovi jednou větou, co v náhledu zkusit.
+
+**Data z náhledu → migrace.** Když Broulick v náhledu zadá nebo změní data a řekne „ulož data“ (nebo na konci práce, když data měnil):
+1. Stáhni každou kolekci (`vehicles`, `defects`, `log`, `parts`, `readings`, `orders`) přes ArtifactData `list` s `out_dir` do jedné dočasné složky (mimo repozitář).
+2. `python3 nastroje/migrace.py <složka> --popis "co Broulick zadal"` – zapíše jen rozdíl proti `db/stav-dat.json` jako novou migraci.
+3. Commitni migraci i `db/stav-dat.json` společně (`feat: přidej data z náhledu …`). Starší migrace nikdy neupravuj.
+
+**Když nová funkce potřebuje nové pole v datech:** přidej novou migraci schématu `V###__popis.sql` (ALTER TABLE, nikdy neměň V001), uprav mapování v `nastroje/migrace.py` a dej to Petrovi ke schválení (PR s „Poznámkou pro Petra“).
+
+**Omezení MySQL 5.5:** žádný JSON, DATETIME bez zlomků a bez DEFAULT CURRENT_TIMESTAMP, indexy max. 767 B (id jako ASCII, indexované texty max. VARCHAR(150)), utf8mb4 až od 5.5.3.
+
 ---
 
 # Kontext projektu

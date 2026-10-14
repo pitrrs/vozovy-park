@@ -8,7 +8,11 @@
       "README.md",
       "claude-verze/**",
       "**/.*",
-      "CLAUDE.md"
+      "CLAUDE.md",
+      "prototyp/**",
+      "pozadavky/**",
+      "db/**",
+      "nastroje/**"
     ],
     "headers": [
       {
