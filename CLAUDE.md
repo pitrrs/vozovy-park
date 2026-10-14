@@ -51,7 +51,7 @@ Když někdo (typicky Broulick) začne něco řešit z mobilu:
 ### Údržba gitu
 - Malé, logicky ucelené commity; jedna větev = jedna věc.
 - Žádné soubory s daty, hesly, zálohami ani `node_modules` (viz `.gitignore`). `config.js` obsahuje jen veřejné klíče Firebase.
-- Po sloučení mazat větve; staré nesloučené větve (starší než ~2 týdny) připomenout Petrovi.
+- Po sloučení mazat větve. Sezení Claude nemusí mít právo mazat větve na GitHubu – pak požádej toho, kdo slučoval, ať v pull requestu klikne na **Delete branch**. Staré nesloučené větve (starší než ~2 týdny) připomenout Petrovi.
 - Nepřepisovat historii `main` (žádný force-push na `main`).
 - Když změna vyžaduje krok mimo git (nové `firestore.rules`, nasazení, publikace artefaktu na claude.ai), napiš to do PR a řekni to uživateli.
 
