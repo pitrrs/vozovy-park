@@ -59,11 +59,18 @@ Když někdo (typicky Broulick) začne něco řešit z mobilu:
 
 # Kontext projektu
 
+## Směr projektu: Flutter
+
+- Aplikace se bude dál vyvíjet v **Dart / Flutter**, aby byla multiplatformní (Android, iOS, web).
+- **Architekturu vede Petr.** Volbu správy stavu, backendu, struktury projektu, balíčků, buildů a nasazení nenavrhuj jako hotovou věc – připrav podklady a nech rozhodnutí na Petrovi.
+- Současné HTML verze (kořen repa a `claude-verze/`) jsou **funkční prototyp a specifikace**: popisují, co aplikace umí a jak se chová. Nové funkce do nich přidávej jen na výslovné přání.
+- Broulickovy nápady zapisuj tak, aby je Petr mohl převzít do Flutteru (co má uživatel vidět a dělat, ne jak to naprogramovat).
+
 Aplikace pro servis firemního vozového parku (cca 30 vozidel). Vznikla v konverzaci s Claude jako artefakt na claude.ai a pak byla převedena na samostatnou webovou aplikaci na Firebase. Uživatelé jsou Češi, celé UI je česky a hlavně se používá na telefonech s Androidem.
 
 ## Dvě verze
 
-- **Kořen repa = verze pro vlastní web** (Firebase Auth + Firestore, PWA). Toto je hlavní verze, na ní se dál pracuje.
+- **Kořen repa = verze pro vlastní web** (Firebase Auth + Firestore, PWA). Do přechodu na Flutter je to hlavní funkční verze.
 - **`claude-verze/servis-vozu.html`** = původní artefakt na claude.ai (běží přes `window.claude` capability `db`/`assets`/`user`). Jen pro referenci. Při změnách funkcí historicky upravujeme obě verze stejně.
 
 Obě verze sdílejí stejný kód UI; liší se jen startem (`boot()`), datovou vrstvou a fotkami. Ve Firebase verzi je `db` tenký obal nad Firestore se stejným API (`collection().where().orderBy().limit().onSnapshot()`, `doc().set/update/delete`), takže zbytek kódu je společný.
@@ -99,4 +106,4 @@ Checklist základních úkonů (`TASKS`): motorový olej, vzduchový / palivový
 - Nepoužívat `window.confirm/alert` – v artefaktu na claude.ai jsou blokované; místo nich `askConfirm()`.
 - V artefaktu na claude.ai má dotaz `limit()` maximum 1000 (vyšší hodnota rozbila načítání závad).
 - Mobilní aplikace Claude na Androidu neotevře výběr souboru → fotky v artefaktu jen přes prohlížeč; Firebase verze tento problém nemá.
-- Funkční změny dělat v obou verzích (kořen repa i `claude-verze/`). Artefakt na claude.ai se publikuje jen ze sezení Broulicka, který ho vlastní – v jiném sezení jen uprav soubor a upozorni na to.
+- Pokud se ještě mění HTML prototyp, dělat změny v obou verzích (kořen repa i `claude-verze/`). Artefakt na claude.ai se publikuje jen ze sezení Broulicka, který ho vlastní – v jiném sezení jen uprav soubor a upozorni na to.
