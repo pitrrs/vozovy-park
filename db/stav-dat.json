@@ -1,0 +1,478 @@
+{
+ "defects": {
+  "demo-d01": {
+   "by": null,
+   "byLabel": "Demo řidič",
+   "createdAt": "2026-10-13T10:00:00.000Z",
+   "date": "2026-10-13",
+   "km": 411800,
+   "note": null,
+   "photo": null,
+   "resolvedAt": null,
+   "severity": "krit",
+   "status": "nova",
+   "text": "Při brzdění tahá doleva, pískají přední brzdy.",
+   "vehicleId": "demo-v01"
+  },
+  "demo-d02": {
+   "by": null,
+   "byLabel": "Demo řidič",
+   "createdAt": "2026-10-13T10:01:00.000Z",
+   "date": "2026-10-13",
+   "km": 411800,
+   "note": null,
+   "photo": null,
+   "resolvedAt": null,
+   "severity": "lehka",
+   "status": "nova",
+   "text": "Nesvítí pravé zadní obrysové světlo.",
+   "vehicleId": "demo-v01"
+  },
+  "demo-d03": {
+   "by": null,
+   "byLabel": "Demo řidič",
+   "createdAt": "2026-10-10T10:02:00.000Z",
+   "date": "2026-10-10",
+   "km": 498400,
+   "note": "Objednaná nová spojka, dorazí ve čtvrtek.",
+   "photo": null,
+   "resolvedAt": null,
+   "severity": "krit",
+   "status": "resi",
+   "text": "Uniká vzduch u návěsové spojky, kompresor často dofukuje.",
+   "vehicleId": "demo-v03"
+  },
+  "demo-d04": {
+   "by": null,
+   "byLabel": "Demo řidič",
+   "createdAt": "2026-09-28T10:03:00.000Z",
+   "date": "2026-09-28",
+   "km": 8720,
+   "note": "Vyměníme při zimním servisu.",
+   "photo": null,
+   "resolvedAt": null,
+   "severity": "lehka",
+   "status": "odlozeno",
+   "text": "Prasklé sklo dveří kabiny.",
+   "vehicleId": "demo-v04"
+  },
+  "demo-d05": {
+   "by": null,
+   "byLabel": "Demo řidič",
+   "createdAt": "2026-10-02T10:04:00.000Z",
+   "date": "2026-10-02",
+   "km": 86100,
+   "note": "Dohuštěno, kalibrace TPMS.",
+   "photo": null,
+   "resolvedAt": "2026-10-03",
+   "severity": "lehka",
+   "status": "hotovo",
+   "text": "Kontrolka tlaku v pneumatikách.",
+   "vehicleId": "demo-v07"
+  },
+  "demo-d06": {
+   "by": null,
+   "byLabel": "Demo řidič",
+   "createdAt": "2026-10-06T10:05:00.000Z",
+   "date": "2026-10-06",
+   "km": 4100,
+   "note": null,
+   "photo": null,
+   "resolvedAt": "2026-10-07",
+   "severity": "krit",
+   "status": "hotovo",
+   "text": "Teče hydraulický olej z hadice na lžíci.",
+   "vehicleId": "demo-v05"
+  }
+ },
+ "log": {
+  "demo-l01": {
+   "by": null,
+   "createdAt": "2026-06-02T14:00:00.000Z",
+   "date": "2026-06-02",
+   "done": "Velký servis podle plánu.",
+   "fixed": [],
+   "kind": "service",
+   "km": 610000,
+   "labor": 3500,
+   "notDone": null,
+   "parts": [
+    {
+     "name": "Motorový olej 10W-40",
+     "price": 7600,
+     "qty": 38
+    },
+    {
+     "name": "Sada filtrů",
+     "price": 4850,
+     "qty": 1
+    }
+   ],
+   "tasks": [
+    "Výměna motorového oleje",
+    "Výměna olejového filtru",
+    "Výměna palivového filtru",
+    "Výměna vzduchového filtru",
+    "Olej převodovka"
+   ],
+   "types": [
+    "Pravidelný servis"
+   ],
+   "vehicleId": "demo-v02"
+  },
+  "demo-l02": {
+   "by": null,
+   "createdAt": "2026-02-20T14:01:00.000Z",
+   "date": "2026-02-20",
+   "done": null,
+   "fixed": [],
+   "kind": "service",
+   "km": 470000,
+   "labor": 2400,
+   "notDone": "Olej v nápravách 3 a 4 příště.",
+   "parts": [
+    {
+     "name": "Motorový olej 10W-40",
+     "price": 6800,
+     "qty": 34
+    }
+   ],
+   "tasks": [
+    "Výměna motorového oleje",
+    "Výměna olejového filtru",
+    "Olej v nápravě 1",
+    "Olej v nápravě 2"
+   ],
+   "types": [],
+   "vehicleId": "demo-v03"
+  },
+  "demo-l03": {
+   "by": null,
+   "createdAt": "2026-10-07T14:02:00.000Z",
+   "date": "2026-10-07",
+   "done": "Výměna hydraulické hadice na lžíci, doplnění oleje.",
+   "fixed": [
+    "demo-d06"
+   ],
+   "kind": "repair",
+   "km": 4100,
+   "labor": 900,
+   "notDone": null,
+   "parts": [
+    {
+     "name": "Hydraulická hadice 1/2\"",
+     "price": 1290,
+     "qty": 1
+    },
+    {
+     "name": "Hydraulický olej HV46",
+     "price": 650,
+     "qty": 5
+    }
+   ],
+   "tasks": [],
+   "types": [],
+   "vehicleId": "demo-v05"
+  },
+  "demo-l04": {
+   "by": null,
+   "createdAt": "2026-07-01T14:03:00.000Z",
+   "date": "2026-07-01",
+   "done": null,
+   "fixed": [],
+   "kind": "service",
+   "km": 8300,
+   "labor": 1800,
+   "notDone": null,
+   "parts": [
+    {
+     "name": "Motorový olej 15W-40",
+     "price": 4200,
+     "qty": 28
+    }
+   ],
+   "tasks": [
+    "Výměna motorového oleje",
+    "Výměna olejového filtru",
+    "Výměna naftového filtru na motoru"
+   ],
+   "types": [],
+   "vehicleId": "demo-v04"
+  }
+ },
+ "orders": {
+  "demo-v08": {
+   "by": null,
+   "checked": [
+    "Výměna motorového oleje",
+    "Výměna olejového filtru"
+   ],
+   "date": "2026-10-14",
+   "extra": [
+    "Kontrola brzd"
+   ],
+   "km": 142300,
+   "removed": [
+    "Olej v nápravě 3",
+    "Olej v nápravě 4",
+    "Olej v nápravě 5",
+    "Olej sestup"
+   ],
+   "vehicleId": "demo-v08"
+  }
+ },
+ "parts": {
+  "demo-p01": {
+   "arrivedAt": null,
+   "by": null,
+   "createdAt": "2026-10-13T11:00:00.000Z",
+   "date": "2026-10-13",
+   "defectId": "demo-d01",
+   "name": "Brzdové destičky přední",
+   "note": "Sada na nápravu",
+   "orderedAt": null,
+   "qty": 1,
+   "status": "objednat",
+   "vehicleId": "demo-v01"
+  },
+  "demo-p02": {
+   "arrivedAt": null,
+   "by": null,
+   "createdAt": "2026-10-10T11:01:00.000Z",
+   "date": "2026-10-10",
+   "defectId": "demo-d03",
+   "name": "Návěsová spojka vzduchu",
+   "note": "Wabco",
+   "orderedAt": "2026-10-11",
+   "qty": 1,
+   "status": "objednano",
+   "vehicleId": "demo-v03"
+  },
+  "demo-p03": {
+   "arrivedAt": "2026-10-02",
+   "by": null,
+   "createdAt": "2026-09-30T11:02:00.000Z",
+   "date": "2026-09-30",
+   "defectId": null,
+   "name": "Stírátka přední",
+   "note": null,
+   "orderedAt": "2026-09-30",
+   "qty": 2,
+   "status": "dorazilo",
+   "vehicleId": "demo-v07"
+  }
+ },
+ "readings": {
+  "demo-v01": {
+   "at": "2026-10-13T15:00:00.000Z",
+   "by": null,
+   "date": "2026-10-13",
+   "km": 412000
+  },
+  "demo-v04": {
+   "at": "2026-10-12T15:00:00.000Z",
+   "by": null,
+   "date": "2026-10-12",
+   "km": 8740
+  }
+ },
+ "vehicles": {
+  "demo-v01": {
+   "category": "truck",
+   "createdAt": "2026-09-01T07:00:00.000Z",
+   "custom": [
+    {
+     "date": "2027-03-01",
+     "name": "Tachograf – kalibrace"
+    }
+   ],
+   "driver": "Jan Novák",
+   "km": 412000,
+   "kmSetAt": null,
+   "model": "Sklápěč 8×8",
+   "name": "Tatra 815",
+   "notes": null,
+   "oilDate": "2025-11-10",
+   "oilEveryKm": 40000,
+   "oilEveryMonths": 12,
+   "oilKm": 380000,
+   "photo": null,
+   "spz": "1AB 2345",
+   "stkDate": "2026-10-29",
+   "svcDate": "2025-11-10",
+   "svcEveryKm": null,
+   "svcEveryMonths": 12,
+   "svcKm": 380000,
+   "vin": "TNU815S8F00012345",
+   "year": "2015"
+  },
+  "demo-v02": {
+   "category": "truck",
+   "createdAt": "2026-09-01T07:01:00.000Z",
+   "custom": [],
+   "driver": "Petr Svoboda",
+   "km": 655000,
+   "kmSetAt": null,
+   "model": "Tahač",
+   "name": "Scania R450",
+   "notes": null,
+   "oilDate": "2026-06-02",
+   "oilEveryKm": 60000,
+   "oilEveryMonths": 12,
+   "oilKm": 610000,
+   "photo": null,
+   "spz": "2CD 6789",
+   "stkDate": "2027-04-15",
+   "svcDate": "2026-06-02",
+   "svcEveryKm": 120000,
+   "svcEveryMonths": 12,
+   "svcKm": 610000,
+   "vin": "YS2R4X20005123456",
+   "year": "2019"
+  },
+  "demo-v03": {
+   "category": "truck",
+   "createdAt": "2026-09-01T07:02:00.000Z",
+   "custom": [],
+   "driver": "Karel Dvořák",
+   "km": 498500,
+   "kmSetAt": null,
+   "model": "Sklápěč 8×4",
+   "name": "MAN TGS 35.400",
+   "notes": null,
+   "oilDate": "2026-02-20",
+   "oilEveryKm": 30000,
+   "oilEveryMonths": 12,
+   "oilKm": 470000,
+   "photo": null,
+   "spz": "3EF 1122",
+   "stkDate": "2026-10-05",
+   "svcDate": "2026-02-20",
+   "svcEveryKm": null,
+   "svcEveryMonths": 12,
+   "svcKm": 470000,
+   "vin": "WMA30WZZ7HM700123",
+   "year": "2017"
+  },
+  "demo-v04": {
+   "category": "machine",
+   "createdAt": "2026-09-01T07:03:00.000Z",
+   "custom": [],
+   "driver": "Tomáš Král",
+   "km": 8740,
+   "kmSetAt": null,
+   "model": "Pásové rýpadlo",
+   "name": "Caterpillar 320",
+   "notes": null,
+   "oilDate": "2026-07-01",
+   "oilEveryKm": 500,
+   "oilEveryMonths": 12,
+   "oilKm": 8300,
+   "photo": null,
+   "spz": "EV-07",
+   "stkDate": null,
+   "svcDate": "2026-01-15",
+   "svcEveryKm": 1000,
+   "svcEveryMonths": 12,
+   "svcKm": 7800,
+   "vin": null,
+   "year": "2018"
+  },
+  "demo-v05": {
+   "category": "machine",
+   "createdAt": "2026-09-01T07:04:00.000Z",
+   "custom": [],
+   "driver": "Lukáš Beneš",
+   "km": 4120,
+   "kmSetAt": null,
+   "model": "Rýpadlo-nakladač",
+   "name": "JCB 3CX",
+   "notes": null,
+   "oilDate": "2026-08-12",
+   "oilEveryKm": 500,
+   "oilEveryMonths": 12,
+   "oilKm": 3900,
+   "photo": null,
+   "spz": "EV-11",
+   "stkDate": "2027-01-20",
+   "svcDate": "2026-08-12",
+   "svcEveryKm": 1000,
+   "svcEveryMonths": 12,
+   "svcKm": 3900,
+   "vin": null,
+   "year": "2020"
+  },
+  "demo-v06": {
+   "category": "machine",
+   "createdAt": "2026-09-01T07:05:00.000Z",
+   "custom": [],
+   "driver": null,
+   "km": 2210,
+   "kmSetAt": null,
+   "model": "Smykový nakladač",
+   "name": "Bobcat S650",
+   "notes": null,
+   "oilDate": "2026-03-03",
+   "oilEveryKm": 500,
+   "oilEveryMonths": 12,
+   "oilKm": 1800,
+   "photo": null,
+   "spz": "EV-14",
+   "stkDate": null,
+   "svcDate": null,
+   "svcEveryKm": null,
+   "svcEveryMonths": 12,
+   "svcKm": null,
+   "vin": null,
+   "year": "2021"
+  },
+  "demo-v07": {
+   "category": "car",
+   "createdAt": "2026-09-01T07:06:00.000Z",
+   "custom": [],
+   "driver": "Vedoucí servisu",
+   "km": 86400,
+   "kmSetAt": null,
+   "model": "2.0 TDI",
+   "name": "Škoda Octavia Combi",
+   "notes": null,
+   "oilDate": "2025-12-01",
+   "oilEveryKm": 30000,
+   "oilEveryMonths": 24,
+   "oilKm": 71000,
+   "photo": null,
+   "spz": "4GH 3344",
+   "stkDate": "2026-11-08",
+   "svcDate": "2025-12-01",
+   "svcEveryKm": 30000,
+   "svcEveryMonths": 24,
+   "svcKm": 71000,
+   "vin": "TMBJG7NX5N0123456",
+   "year": "2022"
+  },
+  "demo-v08": {
+   "category": "car",
+   "createdAt": "2026-09-01T07:07:00.000Z",
+   "custom": [],
+   "driver": "Dílna",
+   "km": 142300,
+   "kmSetAt": null,
+   "model": "T6.1 dodávka",
+   "name": "VW Transporter",
+   "notes": null,
+   "oilDate": "2026-04-18",
+   "oilEveryKm": 30000,
+   "oilEveryMonths": 12,
+   "oilKm": 128000,
+   "photo": null,
+   "spz": "5IJ 5566",
+   "stkDate": "2027-06-30",
+   "svcDate": "2026-04-18",
+   "svcEveryKm": 30000,
+   "svcEveryMonths": 24,
+   "svcKm": 128000,
+   "vin": "WV1ZZZ7HZMH012345",
+   "year": "2021"
+  }
+ }
+}
