@@ -1,0 +1,29 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function signedIn() { return request.auth != null && request.auth.token.email != null; }
+    function myEmail() { return request.auth.token.email.lower(); }
+    function accessDoc() { return get(/databases/$(database)/documents/settings/access).data; }
+    function isService() { return signedIn() && myEmail() in accessDoc().service; }
+    function isMember() { return signedIn() && (myEmail() in accessDoc().service || myEmail() in accessDoc().drivers); }
+
+    match /settings/access {
+      allow read: if signedIn();
+      // první přihlášený se může stát správcem, jen dokud dokument neexistuje
+      allow create: if signedIn() && request.resource.data.service == [myEmail()] && request.resource.data.drivers == [];
+      allow update: if isService() && myEmail() in request.resource.data.service;
+      allow delete: if false;
+    }
+    match /users/{uid} {
+      allow read: if isMember();
+      allow write: if signedIn() && request.auth.uid == uid;
+    }
+    match /vehicles/{id} { allow read: if isMember(); allow write: if isService(); }
+    match /log/{id}      { allow read: if isMember(); allow write: if isService(); }
+    match /orders/{id}   { allow read: if isMember(); allow write: if isService(); }
+    match /defects/{id}  { allow read: if isMember(); allow create: if isMember(); allow update, delete: if isService(); }
+    match /readings/{id} { allow read, write: if isMember(); }
+    match /parts/{id}    { allow read: if isMember(); allow create: if isMember(); allow update, delete: if isService(); }
+    match /photos/{id}   { allow read: if isMember(); allow create: if isMember(); allow delete: if isService(); }
+  }
+}
