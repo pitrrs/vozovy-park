@@ -1,4 +1,63 @@
-# Kontext projektu pro Claude
+# Pravidla projektu pro Claude
+
+Tento soubor čte Claude na začátku každého sezení. **Pravidla v sekci „Spolupráce“ mají přednost před vším ostatním.**
+
+## Lidé v projektu
+
+- **Broulick** – zadavatel, provozuje servis. Na IT je úplný začátečník a sám to o sobě říká. Píše své nápady a domněnky („chtěl bych, aby…“), ne technická zadání. Pracuje přes **Claude Code na notebooku nebo PC**, ne přes chat a ne přes mobil.
+- **Petr** – zkušený programátor. Broulickovy nápady upřesňuje a vede celý projekt: architekturu, buildy, nasazení, Firebase a schvalování změn.
+
+Na začátku sezení zjisti, s kým mluvíš. Když to nevyplývá z první zprávy, zeptej se jednou krátce: „Jsi Broulick, nebo Petr?“
+
+### Jak mluvit s Broulickem
+- Česky, jednoduše, bez žargonu. Když technický pojem použít musíš (větev, commit, pull request), vysvětli ho jednou větou.
+- Veď ho krok za krokem: řekni, co uděláš, a na konci, co má udělat on (např. „otevři aplikaci a zkus přidat závadu“).
+- Jeho zadání ber jako domněnku. Když je nejasné, polož jednu konkrétní otázku s možnostmi; neodbíhej do technických variant.
+- Nikdy po něm nechtěj spouštět příkazy v terminálu. Všechno s gitem děláš ty.
+- Když navrhuje něco, co by rozbilo data nebo bezpečnost, řekni mu to lidsky a navrhni, ať to probere s Petrem.
+
+### Jak mluvit s Petrem
+- Technicky a stručně. Petr rozhoduje o architektuře, závislostech, buildu a nasazení; jeho upřesnění má přednost před Broulickovým původním zadáním.
+
+## Spolupráce a git (povinné)
+
+### Na začátku každého sezení
+1. `git fetch --all --prune` a aktualizuj `main` (`git pull --ff-only`).
+2. Podívej se na ostatní větve a otevřené pull requesty. Stručně řekni, na čem kdo pracuje, ať nevznikají dvě verze téže změny.
+3. Když navazuješ na existující větev, nejdřív ji stáhni a aktualizuj proti `main` (rebase).
+
+### Každá změna musí skončit v repozitáři
+- Na `main` se nikdy necommituje přímo. Každá změna má **vlastní větev** a **pull request** do `main`.
+- Po každém dokončeném kroku: commit → push větve. Nic nesmí zůstat jen v sezení.
+- Před koncem sezení zkontroluj, že je vše pushnuté (`git status` čistý, větev není napřed před `origin`).
+
+### Slučování do `main`
+- Merge jen po **výslovném odsouhlasení** v konverzaci („ano, sluč to“) od Broulicka nebo Petra.
+- Změny datového modelu, `firestore.rules`, přihlašování, `firebase.json`, buildu nebo nasazení schvaluje **Petr**.
+- Před merge: rebase na aktuální `main`, kontrola syntaxe JS (`node --check` na vytaženém skriptu), po merge smaž větev lokálně i na GitHubu.
+- Preferovaný způsob: squash merge s pojmenovaným commitem podle pravidel níže.
+
+### Práce z mobilu
+Když někdo (typicky Broulick) začne něco řešit z mobilu:
+- připomeň mu jednou vlídně, že projekt se má dělat z notebooku/PC,
+- změnu udělej v nové větvi s prefixem `mobil/` (např. `mobil/fix-tlacitko-smazat`), pushni ji a otevři pull request,
+- **nic neslučuj** – merge proběhne až později na straně Petra nebo Broulicka (z PC) po odsouhlasení.
+
+### Pojmenování
+- **Větve:** `typ/kratky-popis` malými písmeny bez diakritiky, slova pomlčkou. Typy: `feat/` nová funkce, `fix/` oprava chyby, `docs/` dokumentace, `refactor/` úprava kódu bez změny chování, `chore/` údržba, `mobil/` změna z mobilu. Příklad: `feat/objednavky-dilu`.
+- **Commity a názvy PR:** `typ: popis česky v rozkazovacím způsobu`, max. ~70 znaků. Příklad: `fix: oprav mazání závady na kartě`. Do těla commitu napiš proč a co se změnilo pro uživatele.
+- **Popis PR:** co se změnilo z pohledu uživatele aplikace, co je potřeba udělat po nasazení (např. „vložit nová firestore.rules“) a jak to otestovat.
+
+### Údržba gitu
+- Malé, logicky ucelené commity; jedna větev = jedna věc.
+- Žádné soubory s daty, hesly, zálohami ani `node_modules` (viz `.gitignore`). `config.js` obsahuje jen veřejné klíče Firebase.
+- Po sloučení mazat větve; staré nesloučené větve (starší než ~2 týdny) připomenout Petrovi.
+- Nepřepisovat historii `main` (žádný force-push na `main`).
+- Když změna vyžaduje krok mimo git (nové `firestore.rules`, nasazení, publikace artefaktu na claude.ai), napiš to do PR a řekni to uživateli.
+
+---
+
+# Kontext projektu
 
 Aplikace pro servis firemního vozového parku (cca 30 vozidel). Vznikla v konverzaci s Claude jako artefakt na claude.ai a pak byla převedena na samostatnou webovou aplikaci na Firebase. Uživatelé jsou Češi, celé UI je česky a hlavně se používá na telefonech s Androidem.
 
@@ -40,4 +99,4 @@ Checklist základních úkonů (`TASKS`): motorový olej, vzduchový / palivový
 - Nepoužívat `window.confirm/alert` – v artefaktu na claude.ai jsou blokované; místo nich `askConfirm()`.
 - V artefaktu na claude.ai má dotaz `limit()` maximum 1000 (vyšší hodnota rozbila načítání závad).
 - Mobilní aplikace Claude na Androidu neotevře výběr souboru → fotky v artefaktu jen přes prohlížeč; Firebase verze tento problém nemá.
-- Uživatel chce stručné, praktické změny; každou změnu dělat v obou verzích.
+- Funkční změny dělat v obou verzích (kořen repa i `claude-verze/`). Artefakt na claude.ai se publikuje jen ze sezení Broulicka, který ho vlastní – v jiném sezení jen uprav soubor a upozorni na to.

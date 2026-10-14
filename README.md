@@ -22,6 +22,4 @@ Lokálně stačí jakýkoli statický server, např. `npx serve .` – otevírat
 
 ## Práce ve více lidech
 
-- Měňte v samostatné větvi a slučujte přes pull request.
-- Při změně struktury dat upravte i `firestore.rules`.
-- `config.js` obsahuje jen veřejné klíče Firebase (to je v pořádku), přístup k datům hlídají pravidla v `firestore.rules`.
+Pravidla spolupráce (větve, pull requesty, pojmenování, práce z mobilu) jsou v [CLAUDE.md](CLAUDE.md). Ve zkratce: každá změna ve vlastní větvi, pull request do `main`, sloučení až po odsouhlasení.
