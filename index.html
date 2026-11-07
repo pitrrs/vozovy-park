@@ -761,14 +761,14 @@ function defectSheet(id){
     <div><div class="lbl" style="margin:0 0 6px">Závažnost</div><div class="sevpick"><label class="k"><input type="radio" name="sev" value="krit"${sevOf(d)==="krit"?" checked":""}> Kritická</label><label class="l"><input type="radio" name="sev" value="lehka"${sevOf(d)==="lehka"?" checked":""}> Lehká</label></div></div>
     <fieldset><legend>Stav</legend><div class="chips">${Object.entries(STATUS).map(([k,l])=>`<label><input type="radio" name="status" value="${k}"${d.status===k?" checked":""}> ${l}</label>`).join("")}</div>
     <label class="f">Poznámka servisu<textarea name="note" placeholder="Co se s tím udělalo, proč se čeká, co je objednané">${esc(d.note||"")}</textarea></label>
-    ${d.status!=="hotovo"?`<label class="chk" id="wrRep" hidden><input type="checkbox" name="writeRep" checked> Zapsat opravu s díly a cenou</label>`:""}</fieldset>
+    ${d.status!=="hotovo"?`<label class="chk" id="wrRep" hidden><input type="checkbox" name="writeRep"> Doplnit ještě díly a cenu (otevře formulář opravy)</label>`:""}</fieldset>
     <fieldset><legend>Objednat díl k této závadě</legend><div id="dparts" style="display:grid;gap:6px"></div><button type="button" class="btn ghost" id="addDP">+ Přidat díl</button></fieldset>
     ${v?`<button type="button" class="btn ghost" id="toV">Otevřít vůz</button>`:""}`,
   { extraFoot:`<button type="button" class="btn danger" id="delD">Smazat</button>`,
     onSubmit: async f=>{ const fd=new FormData(f); const st=fd.get("status");
       await addParts(d.vehicleId, fd.getAll("opName"), fd.getAll("opQty"), d.id);
       await db.doc("defects/"+d.id).update({ status:st, severity:fd.get("sev")==="krit"?"krit":"lehka", note:String(fd.get("note")||"").trim()||null, resolvedAt:(st==="hotovo"&&d.status!=="hotovo")?iso():(d.resolvedAt||null) });
-      if(st==="hotovo"&&d.status!=="hotovo"&&fd.get("writeRep")&&v){ setTimeout(()=>logForm(v,null,{date:iso(), km:curKm(v)||"", types:[], parts:[], kind:"repair", done:d.text, fixedPre:[d.id]}),60); }
+      if(st==="hotovo"&&d.status!=="hotovo"&&fd.get("writeRep")&&v){ setTimeout(()=>logForm(v,null,{date:iso(), km:curKm(v)||"", types:[], parts:[], kind:"repair", done:String(fd.get("note")||"").trim()||d.text, fixedPre:[d.id]}),60); }
       else toast(st==="hotovo"?"Opraveno – přesunuto do Oprav.":"Uloženo."); }});
   const wr=$("#wrRep"); if(wr){ const upd=()=>{ wr.hidden=!$$('input[name="status"]',dlg).some(i=>i.checked&&i.value==="hotovo"); }; $$('input[name="status"]',dlg).forEach(i=>i.onchange=upd); upd(); }
   resolveNames();
